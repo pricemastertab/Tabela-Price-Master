@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela Price</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="Capturar.PNG" type="image/x-icon">
+</head>
+<body>
+    <!-- Seu conteúdo HTML aqui -->
+    <h1 style="background-color: #c2c8ff; color: #c2c8ff; border-radius: 40px; font-size: 600px; position: absolute; left: 24.9%; top: -52.5%; width: 50%; height: 99%;" > oi</h1>
+    <h1 style="color: #141414; position: absolute; left: 24.8%; font-size: 64.5px; top: -6%;", id="pause">Simulador de Empréstimo</h1>
+    <input type="number", style="border-radius: 40px;", id="pv">
+    <h1 class="favela" style="color: #141414;" >valor desejado</h1>
+    <h1 class="game" style="color: #141414;" >taxa de juros</h1>
+    <input type="number", style="border-radius: 40px;", class="you", id="jur">
+    <h1 class="Hgg", style="border-radius: 40px; color: #141414;" >número de parcelas</h1>
+    <input type="number", style="border-radius: 40px;", class="parc", id="parc">
+    <Button onclick="mudar()" style="position: absolute; left: 45%; color: #c2c8ff; top: 80%;">Calcular</Button>
+    <canvas id="canva" class="canva" ></canvas>
+    <script src="app.js"></script>
+    <h1 class="hzz" id="hzz" ></h1>
+    <h1 class="parcela", id="parcela" ></h1>
+    <h1 class="traba" id="traba" ></h1>
+    <h1 class="trabal"  id="trabal" ></h1>
+    <canvas id="canvas" class="canvas" ></canvas>
+    <h1 class="nad", id="nd" ></h1>
+    <h1 class="juross", id="juross" ></h1>
+    <h1 class="texto" id="texto" ></h1>
+    <h1 class="blab" id="blab" ></h1>
+    <h1 class="ver", id="ver" ></h1>
+    <h1 class="bill" id="bill" style="color: #141414;" ></h1>
+    <h1 class="ultimo", id="ultimo" ></h1>
+</body>
+    <script>
+        function mudar() {
+            var p = document.getElementById('canva');
+            var x = document.getElementById('hzz');
+            var pv = document.querySelector('#pv');
+            var i = document.querySelector('#jur');
+            var n = document.querySelector('#parc');
+            var np = document.getElementById('parcela');
+            var nd = document.querySelector('#nd');
+            var ta = document.getElementById('traba');
+            var ter = document.getElementById('trabal');
+            var canvas = document.getElementById('canvas');
+            var oca = document.getElementById('texto');
+            var valor_juros = document.getElementById('juross');
+            var tot = document.getElementById('blab');
+            var das = document.getElementById('ver');
+            var bora_bill = document.getElementById('bill');
+            var ultimoCom = document.getElementById('ultimo');
+
+            x.textContent = 'prestação';
+            p.style.backgroundColor = '#c2c8ff';
+            x.style.color = '#141414';
+
+            var iValue = parseFloat(i.value) / 100;
+            var pvValue = parseFloat(pv.value);
+            var nValue = parseFloat(n.value);
+
+            var a = (pvValue * iValue * Math.pow(1 + iValue, nValue)) / (Math.pow(1 + iValue, nValue) - 1);
+            nd.style.color = '#141414';
+            nd.textContent = 'R$' + a.toLocaleString('pt-BR', { maximumFractionDigits: 2 });
+
+            var amort = a - (iValue * pvValue);
+            ta.style.color = '#141414';
+            canvas.style.backgroundColor = '#c2c8ff';
+
+            oca.textContent = 'juros somados';
+            oca.style.color = '#141414';
+            var totaljuros = 0;
+            var z = 0;
+            var lala = 0;
+            var total = 0;
+            while (z < nValue) {
+                var jurosa = iValue * pvValue;
+                totaljuros += jurosa;
+                pvValue -= (a - jurosa);
+                lala += a;
+                var roundedAmort = (a - jurosa).toFixed(2);
+                total += parseFloat(roundedAmort);
+                z++;
+            }
+            tot.textContent = 'valor com juros';
+            ta.textContent = 'soma da armotização';
+            ter.textContent = 'R$ ' + total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+            var ba = totaljuros+parseFloat(pv.value)
+            ultimoCom.style.color = '#141414';
+            tot.style.color = '#141414';
+            das.textContent = 'R$' + ba.toFixed(2).replace('.', ',');
+            das.style.color = '#141414';
+            valor_juros.textContent = 'R$' + totaljuros.toLocaleString('pt-BR', { maximumFractionDigits: 2});
+            valor_juros.style.color = '#141414';
+        }
+    </script>
+</body>
+</html>
